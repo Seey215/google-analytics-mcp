@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Use environment variables for authentication
-const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
 const serviceAccountEmail = credentials.client_email;
 const analyticsDataClient = new BetaAnalyticsDataClient({
   projectId: credentials.project_id,
@@ -45,7 +45,7 @@ async function executeWithErrorHandling(fn, propertyId) {
         }]
       };
     }
-    
+
     // Handle other errors
     return {
       content: [{
