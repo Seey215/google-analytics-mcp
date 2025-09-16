@@ -1,6 +1,6 @@
 {
   "name": "@toolsdk.ai/google-analytics-mcp",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "MCP server for Google Analytics Data API",
   "main": "src/index.js",
   "bin": {
