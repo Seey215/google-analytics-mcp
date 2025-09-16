@@ -46,28 +46,34 @@ Note: Make sure to properly format the private key with `\n` for newlines.
 
 ## Usage
 
-### As a CLI Tool
+### Use [ToolSDK.ai](https://toolsdk.ai/)
 
-```bash
-npx google-analytics-mcp
+```js
+import { ToolSDKApiClient } from 'toolsdk/api';
+const toolSDK = new ToolSDKApiClient();
+// Get Tools
+const GoogleAnalyticsMCP = await toolSDK.package('@toolsdk.ai/google-analytics-mcp', {
+  GOOGLE_CREDENTIALS: process.env.GOOGLE_CREDENTIALS,
+});
 ```
 
-### Programmatic Usage
+### Use Claude
 
-```javascript
-import { spawn } from 'child_process';
-
-const mcpServer = spawn('google-analytics-mcp', {
-  stdio: ['pipe', 'pipe', 'pipe']
-});
-
-mcpServer.stdout.on('data', (data) => {
-  console.log(`stdout: ${data}`);
-});
-
-mcpServer.stderr.on('data', (data) => {
-  console.error(`stderr: ${data}`);
-});
+```json
+{
+  "mcpServers": {
+    "google-analytics-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@toolsdk.ai/google-analytics-mcp"
+      ],
+      "env": {
+        "GOOGLE_CREDENTIALS": "Your Google Credentials JSON String"
+      }
+    }
+  }
+}
 ```
 
 ## Available Tools

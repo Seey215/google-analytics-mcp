@@ -1,6 +1,6 @@
 {
   "name": "@toolsdk.ai/google-analytics-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for Google Analytics Data API",
   "main": "src/index.js",
   "bin": {
@@ -31,5 +31,9 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Seey215/google-analytics-mcp.git"
   }
 }
