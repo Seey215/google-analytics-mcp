@@ -1,0 +1,35 @@
+{
+  "name": "@toolsdk.ai/google-analytics-mcp",
+  "version": "1.0.1",
+  "description": "MCP server for Google Analytics Data API",
+  "main": "src/index.js",
+  "bin": {
+    "google-analytics-mcp": "src/index.js"
+  },
+  "files": [
+    "src/**/*"
+  ],
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "google-analytics",
+    "analytics",
+    "mcp",
+    "model-context-protocol",
+    "data-api",
+    "reporting"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@google-analytics/data": "^5.2.0",
+    "@modelcontextprotocol/sdk": "^1.16.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.25.76"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
