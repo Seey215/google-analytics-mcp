@@ -4,11 +4,44 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import { z } from 'zod';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
 
+// Helper function to load credentials
+function loadCredentials() {
+  // 1. Try direct JSON string first
+  if (process.env.GOOGLE_CREDENTIALS) {
+    try {
+      return JSON.parse(process.env.GOOGLE_CREDENTIALS);
+    } catch (error) {
+      console.error('Warning: Failed to parse GOOGLE_CREDENTIALS environment variable');
+    }
+  }
+
+  // 2. Try file path
+  if (process.env.GOOGLE_CREDENTIALS_PATH) {
+    try {
+      // Resolve path (handles both relative and absolute paths)
+      const credentialsPath = path.resolve(process.cwd(), process.env.GOOGLE_CREDENTIALS_PATH);
+      
+      if (fs.existsSync(credentialsPath)) {
+        const fileContent = fs.readFileSync(credentialsPath, 'utf8');
+        return JSON.parse(fileContent);
+      } else {
+        console.error(`Warning: Credentials file not found at: ${credentialsPath}`);
+      }
+    } catch (error) {
+      console.error('Warning: Failed to read credentials file:', error.message);
+    }
+  }
+
+  return {};
+}
+
 // Use environment variables for authentication
-const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
+const credentials = loadCredentials();
 const serviceAccountEmail = credentials.client_email;
 const analyticsDataClient = new BetaAnalyticsDataClient({
   projectId: credentials.project_id,
